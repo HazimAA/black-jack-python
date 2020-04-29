@@ -1,0 +1,27 @@
+def sum_of_hands(hand):
+    """
+    This function calculates the sum of the hands in Blackjack
+    """
+    sum=0
+    dict_values_of_cards = {'K':10, 'J':10, 'Q':10,'A':11, '10':10, '9':9, '8':8, '7':7, '6':6, '5':5, '4':4, '3':3, '2':2, '1':1}
+    
+    """
+    Appends A to the end of the hand, to facilitate change in value of 'A' if required. ('A' can take values of 1 or 11)
+    """
+    for char in hand:
+        if char == 'A':
+            hand.append(hand.pop(hand.index('A')))
+
+    for char in hand:
+        if char in dict_values_of_cards and char!='A':
+            sum+=dict_values_of_cards[char]
+        elif char in dict_values_of_cards and char == 'A':
+            sum+=dict_values_of_cards[char]
+            if sum > 21:
+                sum = sum - 10
+                """
+                The value of A = 1 if sum exceeds 21 while adding A=11
+                Sum has a value of Sum - 10 (A= 11 initially, we give it a value of 1 instead,
+                by subtracting Ten(11-10 = 1))
+                """
+    return sum
